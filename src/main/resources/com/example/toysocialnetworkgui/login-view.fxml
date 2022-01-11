@@ -8,30 +8,36 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.toysocialnetworkgui.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.toysocialnetworkgui.LoginController">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="219.0" layoutX="239.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="136.0" fitWidth="163.0" layoutX="14.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Garden.jpg" />
          </image></ImageView>
-      <TextField fx:id="usernameTextField" layoutX="288.0" layoutY="237.0" prefHeight="31.0" prefWidth="326.0" />
-      <Label fx:id="usernameLabel" layoutX="134.0" layoutY="236.0" prefHeight="34.0" prefWidth="132.0" text="Username : " textFill="#690f5d">
+      <TextField fx:id="usernameTextField" layoutX="336.0" layoutY="83.0" prefHeight="31.0" prefWidth="326.0" />
+      <Label fx:id="usernameLabel" layoutX="184.0" layoutY="83.0" prefHeight="41.0" prefWidth="153.0" text="Username : " textFill="#69105e">
          <font>
-            <Font size="23.0" />
+            <Font name="Bookman Old Style" size="23.0" />
          </font>
       </Label>
-      <Label fx:id="passwordLabel" layoutX="134.0" layoutY="299.0" prefHeight="34.0" prefWidth="132.0" text="Password :" textFill="#690f5d">
+      <Label fx:id="passwordLabel" layoutX="194.0" layoutY="150.0" prefHeight="34.0" prefWidth="132.0" text="Password :" textFill="#690f5d">
          <font>
-            <Font size="23.0" />
+            <Font name="Bookman Old Style" size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="passwordTextField" layoutX="288.0" layoutY="300.0" prefHeight="31.0" prefWidth="326.0" />
-      <Button fx:id="loginButton" layoutX="288.0" layoutY="357.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="26.0" prefWidth="90.0" text="Login" />
-      <Label fx:id="noAccountLabel" layoutX="91.0" layoutY="441.0" prefHeight="19.0" prefWidth="184.0" text="No account? Please register">
+      <TextField fx:id="passwordTextField" layoutX="336.0" layoutY="151.0" prefHeight="31.0" prefWidth="326.0" />
+      <Button fx:id="loginButton" layoutX="225.0" layoutY="216.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="41.0" prefWidth="90.0" text="Login">
          <font>
-            <Font name="System Italic" size="13.0" />
+            <Font name="Bookman Old Style" size="12.0" />
+         </font></Button>
+      <Label fx:id="noAccountLabel" layoutX="357.0" layoutY="236.0" prefHeight="19.0" prefWidth="184.0" text="No account? Please register">
+         <font>
+            <Font name="Bookman Old Style Italic" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="registerButton" layoutX="459.0" layoutY="424.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="26.0" prefWidth="74.0" text="Register" />
+      <Button fx:id="registerButton" layoutX="566.0" layoutY="225.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="41.0" prefWidth="65.0" text="Register">
+         <font>
+            <Font name="Bookman Old Style" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

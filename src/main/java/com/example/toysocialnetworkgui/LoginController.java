@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -60,8 +61,9 @@ public class LoginController {
                 Stage current = (Stage) source.getScene().getWindow();
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
                 Parent root = fxmlLoader.load();
-                Scene scene = new Scene(root, 800, 800);
-                current.setTitle("Amuly" + username);
+                //Scene scene = new Scene(root, 800, 800);
+                Scene scene = new Scene(root, 800, 800, Color.SEAGREEN);
+                current.setTitle("Micro Social Network" + username);
                 current.setScene(scene);
                 MainController ctrl = fxmlLoader.getController();
                 ctrl.afterLoad(superService,superService.findUsersByName(username).get(0));
@@ -82,7 +84,8 @@ public class LoginController {
            Parent root = fxmlLoader.load();
            SignupController signupController = fxmlLoader.getController();
            signupController.setSuperService(superService);
-           Scene scene = new Scene(root, 700, 600);
+           //Scene scene = new Scene(root, 700, 600);
+           Scene scene = new Scene(root, 700, 300, Color.SEAGREEN);
            current.setTitle("Ian");
            current.setScene(scene);
 

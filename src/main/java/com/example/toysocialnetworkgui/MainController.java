@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -210,7 +211,8 @@ public class MainController {
             Stage current = (Stage) source.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("friends-view.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 700, 600);
+            //Scene scene = new Scene(root, 700, 600);
+            Scene scene = new Scene(root, 700, 300, Color.SEAGREEN);
             current.setTitle("Ian");
             current.setScene(scene);
             FriendsListController ctrl = fxmlLoader.getController();
