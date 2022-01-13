@@ -83,7 +83,7 @@ public class Main extends Application {
 
 
         //Scene scene = new Scene(root, 700, 600);
-        Scene scene = new Scene(root, 700, 600, Color.SEAGREEN);
+        Scene scene = new Scene(root, 700, 297, Color.SEAGREEN);
         primaryStage.setTitle("Micro Social Network");
 
         primaryStage.setScene(scene);

@@ -49,6 +49,9 @@ public class SuperService {
         friendshipService.deleteFriendship(new Tuple<>(user.getId(), friend.getId()));
     }
 
+    public void deleteFriendship(Long id1, Long id2){
+        friendshipService.deleteFriendship(new Tuple<>(id1, id2));
+    }
 
     public List<User> findAllFriendsMathcingNameForGivenUser(User user, String name) {
         List<User> friends_found = new ArrayList<>();
@@ -61,6 +64,13 @@ public class SuperService {
     public List<User> findUsersByName(String name) {
         List<User> users = StreamSupport.stream(userService.findAll().spliterator(), false)
                 .filter(x -> x.getFirstName().matches(name))
+                .collect(Collectors.toList());
+        return users;
+    }
+
+    public List<User> findUsersByLastName(String name) {
+        List<User> users = StreamSupport.stream(userService.findAll().spliterator(), false)
+                .filter(x -> x.getLastName().matches(name))
                 .collect(Collectors.toList());
         return users;
     }
@@ -225,8 +235,8 @@ public class SuperService {
 
     //login function
     public boolean login(String username, String password) {
-        if(userService.getUsersWithUsername(username)!=null){
-            List<User> users = userService.getUsersWithUsername(username);
+        if(userService.getUsersWithLastUsername(username)!=null){
+            List<User> users = userService.getUsersWithLastUsername(username);
             for(User user:users){
 
                 if (user.getPassword().equals(password))

@@ -1,9 +1,11 @@
 package com.example.toysocialnetworkgui.repository;
 
 import com.example.toysocialnetworkgui.domain.Entity;
+import com.example.toysocialnetworkgui.domain.User;
 import com.example.toysocialnetworkgui.domain.validators.ValidationException;
 import com.example.toysocialnetworkgui.repository.repoExceptions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -84,6 +86,8 @@ public interface Repository<ID, E extends Entity<ID>> {
     E findOne(ID longLongTuple);
 
      List<E> getUserByUsername(String username);
+
+    List<E> getUserByUserLastName(String username);
 
 }
 

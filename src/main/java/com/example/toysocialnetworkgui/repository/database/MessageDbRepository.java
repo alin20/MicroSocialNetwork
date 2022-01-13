@@ -135,4 +135,7 @@ public class MessageDbRepository implements Repository<Long, Message> {
 
     @Override
     public List<Message> getUserByUsername(String username){ return null; }
+
+    @Override
+    public List<Message> getUserByUserLastName(String username){ return null; }
 }

@@ -47,7 +47,10 @@ public class MainController {
     Label userName;
 
     @FXML
-    TableView<User> userTableView;
+    TextField searchTextField;
+
+    @FXML
+    TableView<User> usersTableView;
     @FXML
     TableColumn<User,String> lastNameColumn;
     @FXML
@@ -90,7 +93,7 @@ public class MainController {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("friendshipStatus"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        userTableView.setItems(allUsers);
+        usersTableView.setItems(allUsers);
         friendshipTableView.setItems(allRequests);
     }
 
@@ -136,9 +139,9 @@ public class MainController {
     public void sendRequest() {
 
         try {
-            if (userTableView.getSelectionModel().getSelectedItem() == null)
+            if (usersTableView.getSelectionModel().getSelectedItem() == null)
                 return;
-            this.superService.sendFriendRequest(currentUser.getId(),userTableView.getSelectionModel().getSelectedItem().getId());
+            this.superService.sendFriendRequest(currentUser.getId(),usersTableView.getSelectionModel().getSelectedItem().getId());
             this.updateRequests();
         }
         catch (ServiceException e){
@@ -152,7 +155,7 @@ public class MainController {
     }
 
     @FXML
-    public void acceptRequest() {
+    public void acceptButtonClick() {
         String response = "approved";
         try {
             if (friendshipTableView.getSelectionModel().getSelectedItem() == null)
@@ -168,6 +171,13 @@ public class MainController {
             if (currentUser.getId() != friendship.getSender()  && (currentUser.getId() == friendship.getFr1() || currentUser.getId() == friendship.getFr2())  ) {
                 this.superService.responseToFriendRequest(currentUser.getId(), id_receiver, response);
                 this.updateRequests();
+            }else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error!");
+                alert.setHeaderText("A sent friend request cannot be approved!\n");
+                alert.showAndWait();
+                return;
             }
         }
 
@@ -179,7 +189,7 @@ public class MainController {
 
 
     @FXML
-    public void rejectRequest() {
+    public void rejectButtonClick() {
         String response = "rejected";
         try {
             if (friendshipTableView.getSelectionModel().getSelectedItem() == null)
@@ -201,6 +211,23 @@ public class MainController {
         }
     }
 
+    @FXML
+    public void deleteButtonClick(){
+
+        if (friendshipTableView.getSelectionModel().getSelectedItem() == null)
+            return;
+
+        Friendship friendship = friendshipTableView.getSelectionModel().getSelectedItem();
+        if (currentUser.getId() == friendship.getSender()  && (currentUser.getId() == friendship.getFr1() || currentUser.getId() == friendship.getFr2())  )
+        {
+            //delete friendship from db
+            if(friendship.getFriendshipStatus().equals("pending")) {
+                this.superService.deleteFriendship(friendship.getFr1(), friendship.getFr2());
+                this.updateRequests();
+            }
+        }
+    }
+
 
     @FXML
     public void sendFriendRequest(ActionEvent actionEvent) {
@@ -208,7 +235,7 @@ public class MainController {
     }
 
     @FXML
-    public void onFriendsButtonClick(ActionEvent actionEvent) {
+    public void friendsButtonClick(ActionEvent actionEvent) {
         try {
             Node source = (Node) actionEvent.getSource();
             Stage current = (Stage) source.getScene().getWindow();
@@ -226,8 +253,11 @@ public class MainController {
         }
     }
 
-    public void onMessagesButtonClick(ActionEvent actionEvent) {
+    public void messagesButtonClick(ActionEvent actionEvent) {
         try {
+            User selected = usersTableView.getSelectionModel().getSelectedItem();
+            if(selected == null)
+                return;
             Node source = (Node) actionEvent.getSource();
             Stage current = (Stage) source.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("chat-view.fxml"));
@@ -236,15 +266,16 @@ public class MainController {
             current.setTitle("Messages");
             current.setScene(scene);
             ChatController ctrl = fxmlLoader.getController();
-            List<User> found = superService.findUsersByName(usernameTextField.getText());
+            /*List<User> found = superService.findUsersByName(usernameTextField.getText());
             if (found.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error!");
                 alert.setHeaderText("This user doesn't exist!\n");
                 alert.showAndWait();
                 return;
-            }
-            ctrl.afterLoad(superService,currentUser,found.get(0));
+            }*/
+
+            ctrl.afterLoad(superService,currentUser,selected);
 
         }catch (IOException e) {
             e.printStackTrace();
@@ -252,14 +283,14 @@ public class MainController {
     }
 
 
-    public void logout(ActionEvent actionEvent) {
+    public void LogoutButtonClick(ActionEvent actionEvent) {
         try {
             Node source = (Node) actionEvent.getSource();
             Stage current = (Stage) source.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 700, 600);
-            current.setTitle("Ian");
+            current.setTitle("MicroSocialNetwork");
             current.setScene(scene);
             LoginController mainController = fxmlLoader.getController();
             mainController.setServiceController(superService);
@@ -268,6 +299,35 @@ public class MainController {
             e.printStackTrace();
         }
 
+    }
+
+    public void groupsButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void editProfileButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void eventsButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void notificationsButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void showButton(ActionEvent actionEvent) {
+        String username = searchTextField.getText();
+        if(username.strip().isBlank())
+            return;
+        updateUserAfterSearch(username);
+    }
+
+    private void updateUserAfterSearch(String username) {
+        this.allUsers.clear();
+        Iterable<User> users = this.superService.findUsersByLastName(username);
+        this.setUsernames(users);
+    }
+
+    public void refreshButtonClick(ActionEvent actionEvent) {
+        updateUsers();
     }
 }
 

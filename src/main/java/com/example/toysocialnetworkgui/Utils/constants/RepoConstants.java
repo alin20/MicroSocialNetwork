@@ -10,8 +10,9 @@ public class RepoConstants {
     public static final String SELECT_ALL_USERS_DB = "SELECT * from users";
     public static final String FIND_USER_BY_FIRST_AND_LAST_NAME = "select id,first_name,last_name from users where first_name = ? and last_name = ?";
     public static final String FIND_USER_BY_USERNAME_DB = "SELECT id,first_name,last_name,password from users where first_name = ?";
+    public static final String FIND_USER_BY_USERLASTNAME_DB = "SELECT id,first_name,last_name,password from users where last_name = ?";
 
-    //Return codes for functions
+   //Return codes for functions
     public static final int SUCCESFUL_OPERATION_RETURN_CODE = 0;
     public static final int UNSUCCESFUL_OPERATION_RETURN_CODE = 1;
 

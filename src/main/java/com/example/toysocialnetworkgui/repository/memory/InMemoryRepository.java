@@ -79,7 +79,9 @@ public class InMemoryRepository<ID, E extends Entity<ID>> implements Repository<
         return entities.get(id);
     }
 
-
     @Override
     public List getUserByUsername(String username){ return null; }
+
+    @Override
+    public List getUserByUserLastName(String username){ return null; }
 }

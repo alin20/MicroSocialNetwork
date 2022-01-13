@@ -173,6 +173,24 @@ public class UserDbRepository implements Repository<Long, User> {
        return null;
    }
 
+    //new add
+    @Override
+    public List<User> getUserByUserLastName(String username_1){
+        String sql = FIND_USER_BY_USERLASTNAME_DB;
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement statement = connection.prepareStatement(sql);)
+        {
+            statement.setString(1, username_1);
+            List<User> rez = getUsers(statement);
+            if (rez.isEmpty())
+                return null;
+            return rez;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
 
 }
 

@@ -37,5 +37,10 @@ public class UserService {
    public List<User> getUsersWithUsername(String username){
        List<User> users = repo.getUserByUsername(username);
        return users;
+
    }
+    public List<User> getUsersWithLastUsername(String username){
+        List<User> users = repo.getUserByUserLastName(username);
+        return users;
+    }
 }

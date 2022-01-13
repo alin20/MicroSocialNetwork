@@ -8,11 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.toysocialnetworkgui.LoginController">
+<AnchorPane fx:id="loginAnchorPane" stylesheets ="@style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.toysocialnetworkgui.LoginController">
+
    <children>
       <ImageView fitHeight="136.0" fitWidth="163.0" layoutX="14.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Garden.jpg" />
+            <Image url="@Pictures/Garden.jpg" />
          </image></ImageView>
       <TextField fx:id="usernameTextField" layoutX="336.0" layoutY="83.0" prefHeight="31.0" prefWidth="326.0" />
       <Label fx:id="usernameLabel" layoutX="184.0" layoutY="83.0" prefHeight="41.0" prefWidth="153.0" text="Username : " textFill="#69105e">

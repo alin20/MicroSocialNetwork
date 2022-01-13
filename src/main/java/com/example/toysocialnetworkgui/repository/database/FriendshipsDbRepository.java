@@ -183,5 +183,7 @@ public class FriendshipsDbRepository implements Repository<Tuple<Long,Long>, Fri
     }
     @Override
     public List<Friendship> getUserByUsername(String username){ return null; }
+    @Override
+    public List<Friendship> getUserByUserLastName(String username){ return null; }
 }
 

@@ -141,12 +141,12 @@ public class ChatController {
             label.setStyle("-fx-hgap: 10px;" +
                     "    -fx-padding: 20px;" +
                     "" +
-                    "    -fx-background-color: #997dff;" +
+                    "    -fx-background-color: #ee8917;" +
                     "    -fx-background-radius: 25px;" +
                     "" +
                     "    -fx-border-radius: 25px;" +
                     "    -fx-border-width: 5px;" +
-                    "    -fx-border-color: #997dff;" +
+                    "    -fx-border-color: #efea87;" +
                     "-fx-text-fill: white;");
             return label;
         }
