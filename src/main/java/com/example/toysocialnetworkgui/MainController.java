@@ -1,5 +1,6 @@
 package com.example.toysocialnetworkgui;
 
+import com.example.toysocialnetworkgui.domain.Event;
 import com.example.toysocialnetworkgui.domain.Friendship;
 import com.example.toysocialnetworkgui.domain.User;
 import com.example.toysocialnetworkgui.service.ServiceException;
@@ -29,6 +30,7 @@ public class MainController {
 
     ObservableList<User> allUsers = FXCollections.observableArrayList();
     ObservableList<Friendship> allRequests = FXCollections.observableArrayList();
+    ObservableList<Event> allEvents = FXCollections.observableArrayList();
 
     @FXML
     Button sendDeleteButton;
@@ -69,6 +71,18 @@ public class MainController {
     TableColumn<Friendship, Date>  dateColumn;
 
     @FXML
+    TableView<Event> eventsTableView;
+
+    @FXML
+    TableColumn<Event,String> eventNameColumn;
+    @FXML
+    TableColumn<Event,String> eventDescriptionColumn;
+    @FXML
+    TableColumn<Event,String> eventDateColumn;
+
+
+
+    @FXML
     public void initialize() {
 
         //this.userTableView.managedProperty().bind(this.userTableView.visibleProperty());
@@ -93,8 +107,13 @@ public class MainController {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("friendshipStatus"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
+        eventNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        eventDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("Descriere"));
+        eventDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+
         usersTableView.setItems(allUsers);
         friendshipTableView.setItems(allRequests);
+        eventsTableView.setItems(allEvents);
     }
 
         public void setServiceController(SuperService superService) {
@@ -112,10 +131,19 @@ public class MainController {
         this.updateUsers();
         userName.setText(currentUser.getLastName());
 
-
+        this.updateEvents();
         this.updateRequests();
     }
 
+    private void updateEvents() {
+        this.allEvents.clear();
+        Iterable<Event> events = this.superService.getAllEventsForUser(currentUser.getId());
+        this.setEvents(events);
+    }
+
+    private void setEvents(Iterable<Event> events) {
+        events.forEach(u->{this.allEvents.add(u);});
+    }
 
     public void updateRequests(){
         this.allRequests.clear();
@@ -155,7 +183,7 @@ public class MainController {
     }
 
     @FXML
-    public void acceptButtonClick() {
+    public void acceptRequest() {
         String response = "approved";
         try {
             if (friendshipTableView.getSelectionModel().getSelectedItem() == null)
@@ -171,13 +199,6 @@ public class MainController {
             if (currentUser.getId() != friendship.getSender()  && (currentUser.getId() == friendship.getFr1() || currentUser.getId() == friendship.getFr2())  ) {
                 this.superService.responseToFriendRequest(currentUser.getId(), id_receiver, response);
                 this.updateRequests();
-            }else
-            {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error!");
-                alert.setHeaderText("A sent friend request cannot be approved!\n");
-                alert.showAndWait();
-                return;
             }
         }
 
@@ -189,7 +210,7 @@ public class MainController {
 
 
     @FXML
-    public void rejectButtonClick() {
+    public void rejectRequest() {
         String response = "rejected";
         try {
             if (friendshipTableView.getSelectionModel().getSelectedItem() == null)
@@ -202,8 +223,8 @@ public class MainController {
             Friendship friendship = friendshipTableView.getSelectionModel().getSelectedItem();
             if (currentUser.getId() != friendship.getSender()  && (currentUser.getId() == friendship.getFr1() || currentUser.getId() == friendship.getFr2())  )
             {
-            this.superService.responseToFriendRequest(currentUser.getId(),id_receiver,response);
-            this.updateRequests();
+                this.superService.responseToFriendRequest(currentUser.getId(),id_receiver,response);
+                this.updateRequests();
             }
         }
         catch (ServiceException e){
@@ -211,8 +232,10 @@ public class MainController {
         }
     }
 
+
+
     @FXML
-    public void deleteButtonClick(){
+    public void cancelRequest(){
 
         if (friendshipTableView.getSelectionModel().getSelectedItem() == null)
             return;
@@ -308,6 +331,23 @@ public class MainController {
     }
 
     public void eventsButtonClick(ActionEvent actionEvent) {
+        try {
+            Node source = (Node) actionEvent.getSource();
+            Stage current = (Stage) source.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("events-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root, 700, 600);
+            current.setTitle("MicroSocialNetwork");
+            current.setScene(scene);
+            EventController mainController = fxmlLoader.getController();
+            mainController.setServiceController(superService);
+            mainController.setCurrentUser(currentUser);
+            mainController.afterLoad(superService,currentUser);
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void notificationsButtonClick(ActionEvent actionEvent) {
@@ -328,6 +368,14 @@ public class MainController {
 
     public void refreshButtonClick(ActionEvent actionEvent) {
         updateUsers();
+    }
+
+    public void unsubButtonClick(ActionEvent actionEvent) {
+        Event selected = eventsTableView.getSelectionModel().getSelectedItem();
+        if(selected == null)
+            return;
+        this.superService.unsubscribeUserToEvent(currentUser.getId(),selected.getId());
+        this.updateEvents();
     }
 }
 

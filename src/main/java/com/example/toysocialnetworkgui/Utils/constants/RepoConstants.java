@@ -34,4 +34,14 @@ public class RepoConstants {
     public static final String UPDATE_MESSAGE_DB =  "update messages "+
                                                     "set delete_status = ? "+
                                                     "where id_mesaj = ?";
+
+
+    public static final String FIND_EVENT_BY_ID_DB = "select id,nume,descriere,data from events where id = ?";
+    public static final String SELECT_ALL_EVENTS_DB = "SELECT * from events";
+    public static final String SAVE_EVENT_DB = "insert into events (nume, descriere,data ) values (?, ?, ?)";
+    public static final String DELETE_EVENT_DB = "delete from events where id = ?";
+    public static final String UPDATE_EVENT_DB = "update events set nume = ?,descriere = ?,data = ? where id = ?";
+    public static final String SUB_TO_EVENT_DB = "insert into users_events_status (user_id,event_id ) values (?, ?)";
+    public static final String UNSUB_TO_EVENT_DB = "delete from users_events_status where user_id = ? and event_id = ?";
+    public static final String EVENTS_USER_SUBBED_T0 = "select event_id from users_events_status where user_id = ?";
 }

@@ -21,6 +21,11 @@ public class FriendshipService {
         repo.save(friendship);
     }*/
 
+    /* Delete friendship relation between two user ID as any id is the id of the person which
+    has requested the friendship relation, and the relation was created accordingly, in order
+    to delete the friendship relation, both variants are looked for and deleted if found.
+     */
+
     public void deleteFriendship(Tuple<Long, Long> id) {
         Tuple<Long, Long> original_id = id;
         Tuple<Long, Long> reversed_id = new Tuple<Long, Long>(original_id.getRight(), original_id.getLeft());
@@ -38,6 +43,5 @@ public class FriendshipService {
     public Iterable<Friendship> findAll() {
         return repo.findAll();
     }
-
 
 }

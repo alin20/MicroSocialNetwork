@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane id="body" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.toysocialnetworkgui.ChatController">
     <stylesheets>
@@ -17,7 +18,10 @@
     <top>
         <HBox spacing="400">
             <Button fx:id="back" style="-fx-background-color: #8B4513;" text="Back" textFill="#eef567">Back</Button>
-            <Label fx:id="destinationLabel">Destination</Label>
+            <Label fx:id="destinationLabel" prefHeight="37.0" prefWidth="107.0" text="Destination">
+            <font>
+               <Font size="14.0" />
+            </font></Label>
         </HBox>
     </top>
     <center>

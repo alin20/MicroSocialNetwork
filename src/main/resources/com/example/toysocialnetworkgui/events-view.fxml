@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="644.0" prefWidth="928.0" style="-fx-background-color: #F0E68C;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.toysocialnetworkgui.EventsView">
+<AnchorPane prefHeight="644.0" prefWidth="928.0" style="-fx-background-color: #F0E68C;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.toysocialnetworkgui.EventController">
    <children>
       <Label alignment="CENTER" layoutX="337.0" layoutY="32.0" prefHeight="78.0" prefWidth="272.0" text="EVENTS" textAlignment="CENTER">
          <font>
@@ -30,32 +30,31 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="NameTextField" layoutX="138.0" layoutY="157.0" prefHeight="25.0" prefWidth="182.0" />
-      <TextField fx:id="DescriptionTextField" layoutX="138.0" layoutY="273.0" prefHeight="25.0" prefWidth="182.0" />
-      <TextField fx:id="DateTextField" layoutX="138.0" layoutY="392.0" prefHeight="25.0" prefWidth="182.0" />
-      <TableView fx:id="EventsList" layoutX="539.0" layoutY="158.0" prefHeight="280.0" prefWidth="350.0">
+      <TextField fx:id="nameTextField" layoutX="138.0" layoutY="157.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField fx:id="descriereTextField" layoutX="138.0" layoutY="273.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField fx:id="dataTextField" layoutX="138.0" layoutY="392.0" prefHeight="25.0" prefWidth="182.0" />
+      <TableView fx:id="eventsTableView"  layoutX="539.0" layoutY="158.0" prefHeight="280.0" prefWidth="350.0">
         <columns>
-          <TableColumn prefWidth="84.0" text="Nume" />
-          <TableColumn prefWidth="107.0" text="Descriere" />
-            <TableColumn prefWidth="71.0" text="Data" />
-            <TableColumn prefWidth="84.0" text="Status" />
+          <TableColumn fx:id="nameColumn" prefWidth="84.0" text="Nume" />
+          <TableColumn fx:id="descriereColumn" prefWidth="107.0" text="Descriere" />
+            <TableColumn fx:id="dataColumn" prefWidth="71.0" text="Data" />
         </columns>
       </TableView>
-      <Button fx:id="SubscribeButton" layoutX="539.0" layoutY="481.0" mnemonicParsing="false" onAction="#subscribeButtonClick" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #FFEFD5;" text="Subscribe">
+      <Button fx:id="subButton" layoutX="539.0" layoutY="481.0" mnemonicParsing="false" onAction="#subButtonClick" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #FFEFD5;" text="Subscribe">
          <font>
             <Font name="Arial" size="17.0" />
          </font></Button>
-      <Button fx:id="UnsubscribeButton" layoutX="756.0" layoutY="481.0" mnemonicParsing="false" onAction="#unsubscribeButtonClick" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #FFEFD5;" text="Unsubscribe">
+      <Button fx:id="UnsubscribeButton" layoutX="756.0" layoutY="481.0" mnemonicParsing="false" onAction="#unsubRequest" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #FFEFD5;" text="Unsubscribe">
          <font>
             <Font name="Arial" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="AddButton" layoutX="163.0" layoutY="450.0" mnemonicParsing="false" onAction="#addButtonClick" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #FFEFD5;" text="Add">
+      <Button fx:id="addButton" layoutX="163.0" layoutY="450.0" mnemonicParsing="false" onAction="#onAddButtonClick" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #FFEFD5;" text="Add">
          <font>
             <Font name="Arial" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="BackButton" layoutX="44.0" layoutY="560.0" mnemonicParsing="false" onAction="#backButtonClick" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #FA8072;" text="Back">
+      <Button fx:id="backButton" layoutX="44.0" layoutY="560.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="49.0" prefWidth="133.0" style="-fx-background-color: #FA8072;" text="Back">
          <font>
             <Font name="Arial" size="17.0" />
          </font>

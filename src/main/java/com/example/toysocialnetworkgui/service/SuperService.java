@@ -1,9 +1,7 @@
 package com.example.toysocialnetworkgui.service;
 
-import com.example.toysocialnetworkgui.domain.Friendship;
-import com.example.toysocialnetworkgui.domain.Message;
-import com.example.toysocialnetworkgui.domain.Tuple;
-import com.example.toysocialnetworkgui.domain.User;
+import com.example.toysocialnetworkgui.domain.*;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -15,16 +13,23 @@ public class SuperService {
     private FriendshipService friendshipService = null;
     private UserService userService = null;
     private MessageService messageService = null;
+    private EventService eventService = null;
 
-
-    public SuperService(FriendshipService friendshipService, UserService userService, MessageService messageService) {
+    public SuperService(FriendshipService friendshipService, UserService userService, MessageService messageService,EventService eventService) {
         this.friendshipService = friendshipService;
         this.userService = userService;
         this.messageService = messageService;
-
+        this.eventService = eventService;
 
     }
 
+    /**
+     * add a new user
+     * @param firstName
+     * @param lastName
+     * @param password
+     * @return unsuccessful operation code
+     */
     public int addUser(String firstName, String lastName, String password) {
         List<User> op = StreamSupport.stream(userService.findAll().spliterator(), false)
                 .filter(x -> x.getFirstName().matches(firstName) && x.getLastName().matches(lastName) && x.getPassword().matches(password))
@@ -34,6 +39,33 @@ public class SuperService {
         User newUser = new User(firstName, lastName, password);
         userService.addUser(newUser);
         return SUCCESFUL_OPERATION_RETURN_CODE;
+    }
+
+    public Iterable<Event> getAllEvents(){
+        return eventService.findAll();
+    }
+    public Iterable<Event> getAllEventsForUser (Long id){
+        return eventService.getAllEventsForUser(id);
+    }
+    public int addEvent(String nume, String descriere, String data){
+
+        List<Event> op = StreamSupport.stream(eventService.findAll().spliterator(), false)
+                .filter(x -> x.getName().matches(nume) && x.getDescriere().matches(descriere) && x.getDate().matches(data))
+                .collect(Collectors.toList());
+        if (!op.isEmpty())
+            return UNSUCCESFUL_OPERATION_RETURN_CODE;
+        Event newEvent = new Event(nume, descriere, data);
+        eventService.addEvent(newEvent);
+
+        return SUCCESFUL_OPERATION_RETURN_CODE;
+
+    }
+
+    public void subscribeUserToEvent(Long user_id,Long event_id){
+        eventService.subscribe(user_id,event_id);
+    }
+    public void unsubscribeUserToEvent(Long user_id,Long event_id){
+        eventService.unsubscribe(user_id,event_id);
     }
 
     public void removeUser(User user) {
@@ -234,6 +266,13 @@ public class SuperService {
 
 
     //login function
+
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean login(String username, String password) {
         if(userService.getUsersWithLastUsername(username)!=null){
             List<User> users = userService.getUsersWithLastUsername(username);
@@ -293,6 +332,9 @@ public class SuperService {
         return sentFriendRequest;
     }
 
+    /*
+      returns the list of all friendships of a particular user
+     */
 
     public List<Friendship> allRequestsOfAUser(Long id){
 
@@ -302,6 +344,24 @@ public class SuperService {
 
 
             if(friendship.getFr1() == id || friendship.getFr2() == id)
+                sentFriendRequest.add(friendship);
+
+        }
+        return sentFriendRequest;
+    }
+
+    /*
+      returns the list of all friendships from a particular user
+     */
+
+    public List<Friendship> allRequestsFromAUser(Long id){
+
+        List<Friendship> sentFriendRequest = new ArrayList<>();
+        Iterable<Friendship> pendingFriendships = friendshipService.findAll();
+        for(Friendship friendship:pendingFriendships){
+
+
+            if(friendship.getFr1() == id)
                 sentFriendRequest.add(friendship);
 
         }

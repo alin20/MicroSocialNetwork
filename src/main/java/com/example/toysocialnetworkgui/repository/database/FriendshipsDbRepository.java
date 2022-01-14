@@ -185,5 +185,20 @@ public class FriendshipsDbRepository implements Repository<Tuple<Long,Long>, Fri
     public List<Friendship> getUserByUsername(String username){ return null; }
     @Override
     public List<Friendship> getUserByUserLastName(String username){ return null; }
+
+    @Override
+    public void subscribe(Tuple<Long, Long> user_id, Tuple<Long, Long> event_id) {
+
+    }
+
+    @Override
+    public void unsubscribe(Tuple<Long, Long> user_id, Tuple<Long, Long> event_id) {
+
+    }
+
+    @Override
+    public Iterable<Friendship> getAllEventsForUser(Tuple<Long, Long> longLongTuple) {
+        return null;
+    }
 }
 

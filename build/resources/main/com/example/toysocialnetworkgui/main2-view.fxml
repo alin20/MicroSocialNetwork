@@ -19,22 +19,22 @@
                   <Font size="55.0" />
                </font>
             </Label>
-            <Button fx:id="GroupsButton" layoutX="216.0" layoutY="11.0" mnemonicParsing="false" onAction="#groupsButtonClick" prefHeight="42.0" prefWidth="118.0" text="Groups">
+            <Button fx:id="GroupsButton" layoutX="216.0" layoutY="11.0" mnemonicParsing="false" onAction="#groupsButtonClick" prefHeight="42.0" prefWidth="118.0" style="-fx-background-color: #AFEEEE;" text="Groups">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="MessagesButton" layoutX="216.0" layoutY="66.0" mnemonicParsing="false" onAction="#messagesButtonClick" prefHeight="42.0" prefWidth="118.0" text="Messages">
+            <Button fx:id="MessagesButton" layoutX="216.0" layoutY="66.0" mnemonicParsing="false" onAction="#messagesButtonClick" prefHeight="42.0" prefWidth="118.0" style="-fx-background-color: #AFEEEE;" text="Messages">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="EditProfileButton" layoutX="380.0" layoutY="10.0" mnemonicParsing="false" onAction="#editProfileButtonClick" prefHeight="42.0" prefWidth="118.0" text="Edit Profile">
+            <Button fx:id="EditProfileButton" layoutX="380.0" layoutY="10.0" mnemonicParsing="false" onAction="#editProfileButtonClick" prefHeight="42.0" prefWidth="118.0" style="-fx-background-color: #AFEEEE;" text="Edit Profile">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="EventsButton" layoutX="380.0" layoutY="66.0" mnemonicParsing="false" onAction="#eventsButtonClick" prefHeight="42.0" prefWidth="118.0" text="Events">
+            <Button fx:id="EventsButton" layoutX="380.0" layoutY="66.0" mnemonicParsing="false" onAction="#eventsButtonClick" prefHeight="42.0" prefWidth="118.0" style="-fx-background-color: #AFEEEE;" text="Events">
                <font>
                   <Font size="18.0" />
                </font>
@@ -64,43 +64,51 @@
             <TableColumn fx:id="dateColumn" prefWidth="94.0" text="Date" />
          </columns>
       </TableView>
-      <Label fx:id="friendRequestLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="698.0" layoutY="132.0" prefHeight="80.0" prefWidth="176.0" style="-fx-background-color: #7B68EE;" text="Friend Requests">
+      <Label fx:id="friendRequestLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="698.0" layoutY="132.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #7B68EE;" text="Friend Requests" textFill="#dcf53b">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="260.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Pictures/Forest.jpg" />
          </image></ImageView>
-      <Label fx:id="userName" alignment="CENTER" layoutX="492.0" layoutY="132.0" prefHeight="80.0" prefWidth="159.0" style="-fx-background-color: #7B68EE;" text="Profile Name">
+      <Label fx:id="userName" alignment="CENTER" layoutX="525.0" layoutY="132.0" prefHeight="80.0" prefWidth="151.0" style="-fx-background-color: #7B68EE;" text="Profile Name" textFill="#dcf53b">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="AcceptButton" layoutX="524.0" layoutY="242.0" mnemonicParsing="false" onAction="#acceptButtonClick" prefHeight="91.0" prefWidth="96.0" text="Accept">
+      <Button fx:id="AcceptButton" layoutX="524.0" layoutY="242.0" mnemonicParsing="false" onAction="#acceptRequest" prefHeight="91.0" prefWidth="96.0" text="Accept">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="RejectButton" layoutX="524.0" layoutY="363.0" mnemonicParsing="false" onAction="#rejectButtonClick" prefHeight="91.0" prefWidth="96.0" text="Reject">
+      <Button fx:id="RejectButton" layoutX="524.0" layoutY="363.0" mnemonicParsing="false" onAction="#rejectRequest" prefHeight="91.0" prefWidth="96.0" text="Reject">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="DeleteButton" layoutX="524.0" layoutY="486.0" mnemonicParsing="false" onAction="#deleteButtonClick" prefHeight="91.0" prefWidth="96.0" text="Delete">
+      <Button fx:id="DeleteButton" layoutX="524.0" layoutY="486.0" mnemonicParsing="false" onAction="#cancelRequest" prefHeight="91.0" prefWidth="96.0" text="Cancel">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <TableView fx:id="usersTableView" layoutX="60.0" layoutY="377.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="usersTableView" layoutX="23.0" layoutY="394.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="firstNameColumn" prefWidth="104.0" text="FirstName" />
           <TableColumn fx:id="lastNameColumn" prefWidth="93.0" text="LastName" />
         </columns>
       </TableView>
-      <Label fx:id="searchLabel" layoutX="20.0" layoutY="325.0" prefHeight="34.0" prefWidth="96.0" text="Search user:" />
-      <TextField fx:id="searchTextField" layoutX="116.0" layoutY="330.0" />
-      <Button fx:id="showButton" layoutX="283.0" layoutY="330.0" mnemonicParsing="false" onAction="#showButton" text="Show" />
-      <Button fx:id="refreshButton" layoutX="280.0" layoutY="416.0" mnemonicParsing="false" onAction="#refreshButtonClick" text="Refresh" />
+      <Label fx:id="searchLabel" layoutX="12.0" layoutY="316.0" prefHeight="34.0" prefWidth="96.0" text="Search user:" />
+      <TextField fx:id="searchTextField" layoutX="101.0" layoutY="321.0" prefHeight="25.0" prefWidth="126.0" />
+      <Button fx:id="showButton" layoutX="32.0" layoutY="354.0" mnemonicParsing="false" onAction="#showButton" prefHeight="34.0" prefWidth="56.0" style="-fx-background-color: #7B68EE;" text="Show" textFill="#dcf53b" />
+      <Button fx:id="refreshButton" layoutX="136.0" layoutY="354.0" mnemonicParsing="false" onAction="#refreshButtonClick" prefHeight="34.0" prefWidth="56.0" style="-fx-background-color: #7B68EE;" text="Refresh" textFill="#dcf53b" />
+      <TableView fx:id="eventsTableView" layoutX="252.0" layoutY="233.0" prefHeight="372.0" prefWidth="260.0">
+        <columns>
+          <TableColumn fx:id="eventNameColumn" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="eventDescriptionColumn" prefWidth="103.0" text="Description" />
+            <TableColumn fx:id="eventDateColumn" text="Date" />
+        </columns>
+      </TableView>
+      <Button fx:id="unsubButton" onAction="#unsubButtonClick" layoutX="252.0" layoutY="172.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="118.0" text="Unsubscribe" />
    </children>
 </AnchorPane>

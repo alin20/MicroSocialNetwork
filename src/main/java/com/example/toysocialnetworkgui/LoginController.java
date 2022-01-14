@@ -1,4 +1,5 @@
 package com.example.toysocialnetworkgui;
+import com.example.toysocialnetworkgui.Utils.constants.HashPassword;
 import com.example.toysocialnetworkgui.domain.User;
 import com.example.toysocialnetworkgui.repository.repoExceptions.RepoException;
 import com.example.toysocialnetworkgui.service.SuperService;
@@ -44,7 +45,9 @@ public class LoginController {
     protected void onLoginButtonClick(ActionEvent event) {
 
         String username = usernameTextField.getText();
-        String password = passwordTextField.getText();
+
+        String password = HashPassword.passHashing(passwordTextField.getText());
+
         if(username.equals("")){
             return;
         }

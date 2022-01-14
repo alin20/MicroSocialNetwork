@@ -89,5 +89,11 @@ public interface Repository<ID, E extends Entity<ID>> {
 
     List<E> getUserByUserLastName(String username);
 
+    void subscribe(ID user_id, ID event_id);
+
+    void unsubscribe(ID user_id, ID event_id);
+
+    Iterable<E> getAllEventsForUser(ID id);
+
 }
 

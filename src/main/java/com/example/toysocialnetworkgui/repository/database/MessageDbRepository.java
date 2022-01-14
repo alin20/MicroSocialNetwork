@@ -138,4 +138,19 @@ public class MessageDbRepository implements Repository<Long, Message> {
 
     @Override
     public List<Message> getUserByUserLastName(String username){ return null; }
+
+    @Override
+    public void subscribe(Long user_id, Long event_id) {
+
+    }
+
+    @Override
+    public void unsubscribe(Long user_id, Long event_id) {
+
+    }
+
+    @Override
+    public Iterable<Message> getAllEventsForUser(Long aLong) {
+        return null;
+    }
 }

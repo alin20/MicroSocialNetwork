@@ -146,7 +146,7 @@ public class ChatController {
                     "" +
                     "    -fx-border-radius: 25px;" +
                     "    -fx-border-width: 5px;" +
-                    "    -fx-border-color: #efea87;" +
+                    "    -fx-border-color: #ee8917;" +
                     "-fx-text-fill: white;");
             return label;
         }
@@ -158,17 +158,23 @@ public class ChatController {
             label.setStyle("-fx-hgap: 5px;" +
                     "    -fx-padding: 5px;" +
                     "" +
-                    "    -fx-background-color: #bbadff;" +
+                    "    -fx-background-color: #60e34b;" +
                     "    -fx-background-radius: 13px;" +
                     "" +
                     "    -fx-border-radius: 13px;" +
                     "    -fx-border-width: 5px;" +
-                    "    -fx-border-color: #bbadff;" +
+                    "    -fx-border-color: #60e34b;" +
                     "-fx-text-fill: white;");
             return label;
         }
     }
 
+    /**
+     *
+     * @param superService
+     * @param currentUser
+     * @param destination
+     */
     public void afterLoad(SuperService superService, User currentUser, User destination) {
         this.superService = superService;
         this.currentUser = currentUser;
