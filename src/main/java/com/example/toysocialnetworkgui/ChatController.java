@@ -8,11 +8,17 @@ package com.example.toysocialnetworkgui;
         import javafx.collections.ObservableList;
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
+        import javafx.fxml.FXMLLoader;
         import javafx.geometry.Pos;
+        import javafx.scene.Node;
+        import javafx.scene.Parent;
+        import javafx.scene.Scene;
         import javafx.scene.control.*;
         import javafx.scene.control.ListView.*;
         import javafx.scene.layout.VBox;
+        import javafx.stage.Stage;
 
+        import java.io.IOException;
         import java.util.List;
 
         import static com.example.toysocialnetworkgui.Utils.constants.DomainConstants.ACTIVE_MESSAGE;
@@ -67,6 +73,23 @@ public class ChatController {
         this.messagesView.getSelectionModel().clearSelection();
         this.textarea.clear();
         updateMessages();
+    }
+
+    public void backButton(ActionEvent actionEvent) {
+        try {
+            Node source = (Node) actionEvent.getSource();
+            Stage current = (Stage) source.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root, 896.0, 578);
+            current.setTitle("Micro");
+            current.setScene(scene);
+            MainController mainController = fxmlLoader.getController();
+            mainController.afterLoad(superService,currentUser);
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     static final class ListViewCell extends ListCell<Message> {

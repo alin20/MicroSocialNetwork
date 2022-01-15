@@ -36,7 +36,7 @@ public class HashPassword {
 
     public static void main(String[] args)
     {
-        String passwordToHash = "gr";
+        String passwordToHash = "sv";
         //password of the one particular user
 
         String generatedPassword = passHashing(passwordToHash);

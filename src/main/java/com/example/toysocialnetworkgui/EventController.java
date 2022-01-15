@@ -67,12 +67,6 @@ public class EventController implements Observer {
         this.currentUser = user;
     }
 
-    /*public void updateAllEvents(){
-        this.allEvents.clear();
-        Iterable<Event> events = this.superService.getAllEvents();
-        this.setEvents(events);
-    }*/
-
     public void setEvents(Iterable<Event> events) {
         events.forEach( u -> this.allEvents.add(u));
     }
@@ -88,10 +82,10 @@ public class EventController implements Observer {
         try {
             Node source = (Node) actionEvent.getSource();
             Stage current = (Stage) source.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main2-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 896.0, 578);
-            current.setTitle("Ian");
+            current.setTitle("Micro");
             current.setScene(scene);
             MainController mainController = fxmlLoader.getController();
             mainController.afterLoad(superService,currentUser);

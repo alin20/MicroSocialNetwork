@@ -88,6 +88,14 @@ public class SuperService implements Observable {
         friendshipService.deleteFriendship(new Tuple<>(user.getId(), friend.getId()));
     }
 
+    public User findUsersByUsernameAndPassword(String username,String password) {
+        for(User user: getAllUsers()){
+            if(user.getLastName().matches(username) && user.getPassword().matches(password))
+                return user;
+        }
+        return null;
+    }
+
     public void deleteFriendship(Long id1, Long id2){
         friendshipService.deleteFriendship(new Tuple<>(id1, id2));
         this.notifyObservers(UpdateType.FRIENDSHIP);
@@ -341,10 +349,10 @@ public class SuperService implements Observable {
         return sentFriendRequest;
     }
 
-    /*
-      returns the list of all friendships of a particular user
+    /**
+     * @param id
+     * @return the list of all friendships of a particular user
      */
-
     public List<Friendship> allRequestsOfAUser(Long id){
 
         List<Friendship> sentFriendRequest = new ArrayList<>();
@@ -359,10 +367,11 @@ public class SuperService implements Observable {
         return sentFriendRequest;
     }
 
-    /*
-      returns the list of all friendships from a particular user
-     */
 
+    /**
+     * @param id
+     * @return the list of all friendships from a particular user
+     */
     public List<Friendship> allRequestsFromAUser(Long id){
 
         List<Friendship> sentFriendRequest = new ArrayList<>();

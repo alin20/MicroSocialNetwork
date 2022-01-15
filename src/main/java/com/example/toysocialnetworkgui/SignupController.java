@@ -1,4 +1,5 @@
 package com.example.toysocialnetworkgui;
+import com.example.toysocialnetworkgui.Utils.constants.HashPassword;
 import com.example.toysocialnetworkgui.domain.User;
 import com.example.toysocialnetworkgui.service.SuperService;
 import javafx.collections.FXCollections;
@@ -39,10 +40,10 @@ public class SignupController {
     protected void onRegisterButtonClick(ActionEvent event) {
         String first_name = firstNameTextField.getText();
         String last_name = lastNameTextField.getText();
-        String password = passwordTextField.getText();
+        String password = HashPassword.passHashing(passwordTextField.getText());
         if(first_name.equals("") || last_name.equals("") || password.equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Cabral sad :( !");
+            alert.setTitle("Error :( !");
             alert.setHeaderText("Invalid credentials!\n");
             alert.showAndWait();
             return;
@@ -64,7 +65,7 @@ public class SignupController {
             Parent root = fxmlLoader.load();
             // Scene scene = new Scene(root, 700, 600);
             Scene scene = new Scene(root, 700, 600, Color.SEAGREEN);
-            current.setTitle("Ian");
+            current.setTitle("Micro");
             current.setScene(scene);
             LoginController mainController = fxmlLoader.getController();
             mainController.setServiceController(superService);

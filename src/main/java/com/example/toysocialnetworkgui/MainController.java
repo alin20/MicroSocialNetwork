@@ -171,15 +171,13 @@ public class MainController implements Observer {
             if (usersTableView.getSelectionModel().getSelectedItem() == null)
                 return;
             this.superService.sendFriendRequest(currentUser.getId(),usersTableView.getSelectionModel().getSelectedItem().getId());
-            //this.updateRequests();
+            this.updateRequests();
         }
         catch (ServiceException e){
-           System.out.println("stefaneeee");
            Alert alert = new Alert(Alert.AlertType.ERROR);
-           alert.setTitle("Can't send friend request!");
-           alert.setHeaderText("Mi ai dat leanul pe jos!");
+           alert.setTitle("Error!");
+           alert.setHeaderText("Can't send friend request!");
            alert.showAndWait();
-
         }
     }
 
@@ -265,11 +263,11 @@ public class MainController implements Observer {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("friends-view.fxml"));
             Parent root = fxmlLoader.load();
             //Scene scene = new Scene(root, 700, 600);
-            Scene scene = new Scene(root, 700, 300, Color.SEAGREEN);
-            current.setTitle("Ian");
+            Scene scene = new Scene(root, 950, 623, Color.SEAGREEN);
+            current.setTitle("Micro");
             current.setScene(scene);
             FriendsListController ctrl = fxmlLoader.getController();
-            ctrl.afterLoad(superService,superService.findUsersByName(currentUser.getFirstName()).get(0));
+            ctrl.afterLoad(superService,currentUser);
 
         }catch (IOException e) {
             e.printStackTrace();
@@ -285,7 +283,7 @@ public class MainController implements Observer {
             Stage current = (Stage) source.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("chat-view.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 700, 600);
+            Scene scene = new Scene(root, 950, 623);
             current.setTitle("Messages");
             current.setScene(scene);
             ChatController ctrl = fxmlLoader.getController();
@@ -337,7 +335,7 @@ public class MainController implements Observer {
             Stage current = (Stage) source.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("events-view.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 700, 600);
+            Scene scene = new Scene(root, 950, 623);
             current.setTitle("MicroSocialNetwork");
             current.setScene(scene);
             EventController mainController = fxmlLoader.getController();

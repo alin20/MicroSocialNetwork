@@ -17,7 +17,7 @@
     </stylesheets>
     <top>
         <HBox spacing="400">
-            <Button fx:id="back" style="-fx-background-color: #8B4513;" text="Back" textFill="#eef567">Back</Button>
+            <Button fx:id="back" onAction="#backButton" style="-fx-background-color: #8B4513;" text="Back" textFill="#eef567">Back</Button>
             <Label fx:id="destinationLabel" prefHeight="37.0" prefWidth="107.0" text="Destination">
             <font>
                <Font size="14.0" />
@@ -39,7 +39,7 @@
                 <Button fx:id="send" onAction="#sendMessageButtonClick" prefHeight="55" prefWidth="80" style="-fx-background-color: #8B4513;" text="Send" textFill="#eef567">
                     Send
                 </Button>
-                <Button fx:id="reset" onAction="#resetReply" prefHeight="25" prefWidth="80" style="-fx-background-color: #8B4513;" textFill="#eef567">
+                <Button fx:id="reset" onAction="#resetReply" prefHeight="25" prefWidth="80" style="-fx-background-color: #8B4513;" textFill="#eef567" text="Clear Selection">
                     No reply
                 </Button>
             </VBox>
