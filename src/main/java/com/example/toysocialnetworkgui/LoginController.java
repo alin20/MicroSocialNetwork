@@ -70,6 +70,7 @@ public class LoginController {
                 current.setScene(scene);
                 MainController ctrl = fxmlLoader.getController();
                 ctrl.afterLoad(superService,superService.findUsersByLastName(username).get(0));
+                //ctrl.afterLoad(superService.findUsersByLastName(username).get(0));
 
 
             } catch (IOException e) {

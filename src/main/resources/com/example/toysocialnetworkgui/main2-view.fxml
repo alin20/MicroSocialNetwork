@@ -100,7 +100,7 @@
       </TableView>
       <Label fx:id="searchLabel" layoutX="12.0" layoutY="316.0" prefHeight="34.0" prefWidth="96.0" text="Search user:" />
       <TextField fx:id="searchTextField" layoutX="101.0" layoutY="321.0" prefHeight="25.0" prefWidth="126.0" />
-      <Button fx:id="showButton" layoutX="32.0" layoutY="354.0" mnemonicParsing="false" onAction="#showButton" prefHeight="34.0" prefWidth="56.0" style="-fx-background-color: #7B68EE;" text="Show" textFill="#dcf53b" />
+      <Button fx:id="showButton" layoutX="32.0" layoutY="354.0" mnemonicParsing="false" onAction="#showButton" prefHeight="34.0" prefWidth="56.0" style="-fx-background-color: #5F9EA0;" text="Show" textFill="#dcf53b" />
       <Button fx:id="refreshButton" layoutX="136.0" layoutY="354.0" mnemonicParsing="false" onAction="#refreshButtonClick" prefHeight="34.0" prefWidth="56.0" style="-fx-background-color: #7B68EE;" text="Refresh" textFill="#dcf53b" />
       <TableView fx:id="eventsTableView" layoutX="252.0" layoutY="233.0" prefHeight="372.0" prefWidth="260.0">
         <columns>
@@ -109,6 +109,6 @@
             <TableColumn fx:id="eventDateColumn" text="Date" />
         </columns>
       </TableView>
-      <Button fx:id="unsubButton" onAction="#unsubButtonClick" layoutX="252.0" layoutY="172.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="118.0" text="Unsubscribe" />
+      <Button fx:id="unsubButton" layoutX="252.0" layoutY="164.0" mnemonicParsing="false" onAction="#unsubButtonClick" prefHeight="42.0" prefWidth="118.0" text="Unsubscribe" />
    </children>
 </AnchorPane>

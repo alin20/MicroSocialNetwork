@@ -47,6 +47,10 @@ public class ChatController {
 
     }
 
+    /**
+     * a message sent by click on button
+     * @param actionEvent
+     */
     public void sendMessageButtonClick(ActionEvent actionEvent) {
         Message selected = messagesView.getSelectionModel().getSelectedItem();
         if(textarea.getText().strip().isBlank()) {
@@ -77,6 +81,11 @@ public class ChatController {
             this.convo = convo;
         }
 
+        /**
+         * update the window with Messages form  current user an from other user
+         * @param item
+         * @param empty
+         */
         @Override
         protected void updateItem(Message item, boolean empty) {
             super.updateItem(item, empty);
@@ -151,6 +160,10 @@ public class ChatController {
             return label;
         }
 
+        /**
+         * @param msg style of reply label in graphic interface
+         * @return
+         */
         private Label styleReplyLabel(String msg){
             var label=new Label(msg);
             label.setMinWidth(50);
@@ -170,7 +183,7 @@ public class ChatController {
     }
 
     /**
-     *
+     *update messages from chat
      * @param superService
      * @param currentUser
      * @param destination
@@ -185,6 +198,9 @@ public class ChatController {
         this.updateMessages();
     }
 
+    /**
+     * updates messages between two users, inclusive reply messages
+     */
     public void updateMessages() {
         this.messages.clear();
         List<Message> convo = this.superService.getMessagesBetweenTwoUsers(currentUser,destination);

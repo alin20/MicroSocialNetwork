@@ -1,5 +1,6 @@
 package com.example.toysocialnetworkgui;
 
+import com.example.toysocialnetworkgui.Observer.Observer;
 import com.example.toysocialnetworkgui.domain.Event;
 import com.example.toysocialnetworkgui.domain.Friendship;
 import com.example.toysocialnetworkgui.domain.User;
@@ -23,7 +24,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-public class MainController {
+public class MainController implements Observer {
 
     SuperService superService;
     private User currentUser;
@@ -84,8 +85,6 @@ public class MainController {
 
     @FXML
     public void initialize() {
-
-        //this.userTableView.managedProperty().bind(this.userTableView.visibleProperty());
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
 
@@ -124,18 +123,19 @@ public class MainController {
             this.currentUser = user;
         }
 
-    public void afterLoad(SuperService superService, User user) {
-        this.setServiceController(superService);
+    public void afterLoad(SuperService superService,User user) {
+        this.superService = superService;
         this.setCurrentUser(user);
-
+        //Adaugam observer
+        this.superService.addObserver(this);
         this.updateUsers();
         userName.setText(currentUser.getLastName());
-
         this.updateEvents();
         this.updateRequests();
     }
 
-    private void updateEvents() {
+    @Override
+    public void updateEvents() {
         this.allEvents.clear();
         Iterable<Event> events = this.superService.getAllEventsForUser(currentUser.getId());
         this.setEvents(events);
@@ -145,6 +145,7 @@ public class MainController {
         events.forEach(u->{this.allEvents.add(u);});
     }
 
+    @Override
     public void updateRequests(){
         this.allRequests.clear();
         Iterable<Friendship> friendships = this.superService.allRequestsOfAUser(currentUser.getId());
@@ -170,7 +171,7 @@ public class MainController {
             if (usersTableView.getSelectionModel().getSelectedItem() == null)
                 return;
             this.superService.sendFriendRequest(currentUser.getId(),usersTableView.getSelectionModel().getSelectedItem().getId());
-            this.updateRequests();
+            //this.updateRequests();
         }
         catch (ServiceException e){
            System.out.println("stefaneeee");
@@ -198,7 +199,8 @@ public class MainController {
 
             if (currentUser.getId() != friendship.getSender()  && (currentUser.getId() == friendship.getFr1() || currentUser.getId() == friendship.getFr2())  ) {
                 this.superService.responseToFriendRequest(currentUser.getId(), id_receiver, response);
-                this.updateRequests();
+                //INAINTE DE OBSERVER TREBUIA APELATA FUNCTIA AICI
+                //this.updateRequests();
             }
         }
 
@@ -224,7 +226,8 @@ public class MainController {
             if (currentUser.getId() != friendship.getSender()  && (currentUser.getId() == friendship.getFr1() || currentUser.getId() == friendship.getFr2())  )
             {
                 this.superService.responseToFriendRequest(currentUser.getId(),id_receiver,response);
-                this.updateRequests();
+                //INAINTE DE OBSERVER TREBUIA APELATA FUNCTIA AICI
+                //this.updateRequests();
             }
         }
         catch (ServiceException e){
@@ -246,16 +249,13 @@ public class MainController {
             //delete friendship from db
             if(friendship.getFriendshipStatus().equals("pending")) {
                 this.superService.deleteFriendship(friendship.getFr1(), friendship.getFr2());
-                this.updateRequests();
+                //INAINTE DE OBSERVER TREBUIA APELATA FUNCTIA AICI
+                //this.updateRequests();
             }
         }
     }
 
 
-    @FXML
-    public void sendFriendRequest(ActionEvent actionEvent) {
-
-    }
 
     @FXML
     public void friendsButtonClick(ActionEvent actionEvent) {
@@ -330,6 +330,7 @@ public class MainController {
     public void editProfileButtonClick(ActionEvent actionEvent) {
     }
 
+    @FXML
     public void eventsButtonClick(ActionEvent actionEvent) {
         try {
             Node source = (Node) actionEvent.getSource();
@@ -340,8 +341,6 @@ public class MainController {
             current.setTitle("MicroSocialNetwork");
             current.setScene(scene);
             EventController mainController = fxmlLoader.getController();
-            mainController.setServiceController(superService);
-            mainController.setCurrentUser(currentUser);
             mainController.afterLoad(superService,currentUser);
 
         }catch (IOException e) {

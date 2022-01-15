@@ -1,5 +1,8 @@
 package com.example.toysocialnetworkgui.service;
 
+import com.example.toysocialnetworkgui.Observer.Observable;
+import com.example.toysocialnetworkgui.Observer.Observer;
+import com.example.toysocialnetworkgui.Observer.UpdateType;
 import com.example.toysocialnetworkgui.domain.*;
 
 import java.util.*;
@@ -9,11 +12,12 @@ import static com.example.toysocialnetworkgui.Utils.constants.DomainConstants.*;
 import static com.example.toysocialnetworkgui.Utils.constants.RepoConstants.*;
 import static com.example.toysocialnetworkgui.Utils.constants.ValidatorConstants.TEMPORARY_MESSAGE_ID;
 
-public class SuperService {
+public class SuperService implements Observable {
     private FriendshipService friendshipService = null;
     private UserService userService = null;
     private MessageService messageService = null;
     private EventService eventService = null;
+    List<Observer> allObservers = new ArrayList<>();
 
     public SuperService(FriendshipService friendshipService, UserService userService, MessageService messageService,EventService eventService) {
         this.friendshipService = friendshipService;
@@ -56,6 +60,7 @@ public class SuperService {
             return UNSUCCESFUL_OPERATION_RETURN_CODE;
         Event newEvent = new Event(nume, descriere, data);
         eventService.addEvent(newEvent);
+        this.notifyObservers(UpdateType.EVENT);
 
         return SUCCESFUL_OPERATION_RETURN_CODE;
 
@@ -63,9 +68,11 @@ public class SuperService {
 
     public void subscribeUserToEvent(Long user_id,Long event_id){
         eventService.subscribe(user_id,event_id);
+        this.notifyObservers(UpdateType.EVENT);
     }
     public void unsubscribeUserToEvent(Long user_id,Long event_id){
         eventService.unsubscribe(user_id,event_id);
+        this.notifyObservers(UpdateType.EVENT);
     }
 
     public void removeUser(User user) {
@@ -83,6 +90,7 @@ public class SuperService {
 
     public void deleteFriendship(Long id1, Long id2){
         friendshipService.deleteFriendship(new Tuple<>(id1, id2));
+        this.notifyObservers(UpdateType.FRIENDSHIP);
     }
 
     public List<User> findAllFriendsMathcingNameForGivenUser(User user, String name) {
@@ -225,6 +233,7 @@ public class SuperService {
             throw new ServiceException("Invalid friend request!");
         Friendship newFriendship = new Friendship(response, idFrom, idTo, sender);
         friendshipService.repo.update(newFriendship);
+        this.notifyObservers(UpdateType.FRIENDSHIP);
     }
 
 
@@ -366,6 +375,21 @@ public class SuperService {
 
         }
         return sentFriendRequest;
+    }
+
+    @Override
+    public void addObserver(Observer obs) {
+        allObservers.add(obs);
+    }
+
+    @Override
+    public void notifyObservers(UpdateType type) {
+        for(Observer obs : allObservers) {
+            if (type == UpdateType.EVENT)
+                obs.updateEvents();
+            if(type == UpdateType.FRIENDSHIP)
+                obs.updateRequests();
+        }
     }
 }
 

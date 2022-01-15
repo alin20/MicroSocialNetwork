@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="542.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.toysocialnetworkgui.FriendsListController">
    <children>
-      <TableView fx:id="friendsTableView" layoutX="158.0" layoutY="173.0" prefHeight="214.0" prefWidth="360.0" style="-fx-background-color: #FFEBCD;">
+      <TableView fx:id="friendsTableView" layoutX="141.0" layoutY="87.0" prefHeight="308.0" prefWidth="439.0" style="-fx-background-color: #FFEBCD;">
         <columns>
           <TableColumn fx:id="firstNameColumn" prefWidth="177.6000518798828" text="FirstName" />
             <TableColumn fx:id="lastNameColumn" minWidth="0.0" prefWidth="180.79998779296875" text="LastName" />
@@ -20,11 +20,11 @@
             <Font size="20.0" />
          </font>
       </Label>
-       <Button fx:id="backButton" layoutX="21.0" layoutY="505.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #FFB6C1;" text="Back">
+       <Button fx:id="backButton" layoutX="14.0" layoutY="482.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #FFB6C1;" text="Back">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="deleteFriend" layoutX="294.0" layoutY="410.0" mnemonicParsing="false" onAction="#onDeleteFriendClick" style="-fx-background-color: #FFB6C1;" text="Delete Friend">
+      <Button fx:id="deleteFriend" layoutX="294.0" layoutY="410.0" mnemonicParsing="false" onAction="#onDeleteFriendClick" prefHeight="39.0" prefWidth="106.0" style="-fx-background-color: #FFB6C1;" text="Delete Friend">
          <font>
             <Font name="Arial" size="14.0" />
          </font></Button>

@@ -1,5 +1,7 @@
 package com.example.toysocialnetworkgui;
 
+import com.example.toysocialnetworkgui.Observer.Observable;
+import com.example.toysocialnetworkgui.Observer.Observer;
 import com.example.toysocialnetworkgui.domain.Event;
 import com.example.toysocialnetworkgui.domain.User;
 import com.example.toysocialnetworkgui.service.SuperService;
@@ -17,7 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class EventController {
+public class EventController implements Observer {
 
 
     SuperService superService;
@@ -50,6 +52,7 @@ public class EventController {
 
     @FXML
     public void initialize() {
+
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         descriereColumn.setCellValueFactory(new PropertyValueFactory<>("Descriere"));
         dataColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -64,20 +67,20 @@ public class EventController {
         this.currentUser = user;
     }
 
-    public void updateAllEvents(){
+    /*public void updateAllEvents(){
         this.allEvents.clear();
         Iterable<Event> events = this.superService.getAllEvents();
         this.setEvents(events);
-    }
+    }*/
 
     public void setEvents(Iterable<Event> events) {
         events.forEach( u -> this.allEvents.add(u));
     }
 
     public void afterLoad(SuperService superService, User user) {
-        this.setServiceController(superService);
+        this.superService = superService;
         this.setCurrentUser(user);
-        this.updateAllEvents();
+        this.updateEvents();
     }
 
     @FXML
@@ -108,7 +111,7 @@ public class EventController {
             return;
         }
         superService.addEvent(nume,descriere,data);
-        this.updateAllEvents();
+        this.updateEvents();
     }
 
     @FXML
@@ -117,14 +120,25 @@ public class EventController {
             return;
         superService.subscribeUserToEvent(currentUser.getId(), eventsTableView.getSelectionModel().getSelectedItem().getId());
 
-        this.updateAllEvents();
+        this.updateEvents();
     }
 
     @FXML
     public void unsubRequest() {
         superService.unsubscribeUserToEvent(currentUser.getId(),eventsTableView.getSelectionModel().getSelectedItem().getId());
-        this.updateAllEvents();
+        this.updateEvents();
 
     }
 
+    @Override
+    public void updateEvents() {
+        this.allEvents.clear();
+        Iterable<Event> events = this.superService.getAllEvents();
+        this.setEvents(events);
+    }
+
+    @Override
+    public void updateRequests() {
+        //
+    }
 }
