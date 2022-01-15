@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 
-///Aceasta clasa implementeaza sablonul de proiectare Template Method; puteti inlucui solutia propusa cu un Factory (vezi mai jos)
+//This class implements the Template Method design template;
 public abstract class AbstractFileRepository<ID, E extends Entity<ID>> extends InMemoryRepository<ID,E> {
     String fileName;
 

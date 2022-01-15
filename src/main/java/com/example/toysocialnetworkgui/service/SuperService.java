@@ -155,16 +155,7 @@ public class SuperService implements Observable {
             if(message.getIdTo().equals(current_user.getId()) && message.getIdFrom() != current_user.getId()){
                 users.add(userService.findUserByID(message.getIdFrom()));
             }
-            /*if(message.getIdTo().equals(current_user.getId()) && message.getIdFrom().equals(current_user.getId())){
-                Message current_message = message;
-                while (current_message.getIdFrom().equals(current_message.getIdTo())) {
-                    current_message = messageService.findMessageById(current_message.getIdReply());
-                }
-                if(current_message.getIdFrom() != current_user.getId())
-                    users.add(userService.findUserByID(current_message.getIdFrom()));
-                if(current_message.getIdTo() != current_user.getId())
-                    users.add(userService.findUserByID(current_message.getIdTo()));
-            }*/
+
         }
         return users;
     }

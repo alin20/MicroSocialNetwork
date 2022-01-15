@@ -53,7 +53,6 @@ public class Tuple<E1, E2> {
 
     @Override
     public int hashCode() {
-        //return Objects.hash(Objects.hash(e1,e2),Objects.hash(e2,e1));
         return Objects.hash(e1,e2);
     }
 }

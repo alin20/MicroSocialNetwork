@@ -17,13 +17,6 @@ public class FriendshipService {
         this.repo = repo;
     }
 
-   /*
-   public void addFriendShip(Friendship friendship) {
-        repo.save(friendship);
-    }
-    */
-
-
     /**
      * As any id is the id of the person which has requested
      * the friendship relation, and the relation was created accordingly,

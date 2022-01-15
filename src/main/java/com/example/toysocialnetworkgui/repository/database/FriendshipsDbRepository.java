@@ -15,7 +15,6 @@ import java.util.Set;
 
 import static com.example.toysocialnetworkgui.Utils.constants.RepoConstants.*;
 
-
 public class FriendshipsDbRepository implements Repository<Tuple<Long,Long>, Friendship> {
 
     private String url;
@@ -48,7 +47,6 @@ public class FriendshipsDbRepository implements Repository<Tuple<Long,Long>, Fri
         return null;
     }
 
-    //de implementat daca e nevoie
     @Override
     public Friendship findOneByOtherAttributes(List<Object> args) {
         return null;
@@ -120,9 +118,6 @@ public class FriendshipsDbRepository implements Repository<Tuple<Long,Long>, Fri
         try(Connection connection = DriverManager.getConnection(url,username,password);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);)
         {
-            // preparedStatement.setTimestamp(1,Timestamp.valueOf(entity.getDate()));
-            //  preparedStatement.setLong(2, entity.getId().getLeft());
-            //preparedStatement.setLong(3, entity.getId().getRight());
             preparedStatement.executeUpdate();
         }
         catch(SQLException ex) {
@@ -136,7 +131,7 @@ public class FriendshipsDbRepository implements Repository<Tuple<Long,Long>, Fri
             while(resultSet.next()) {
                 Long id_1 = resultSet.getLong("id_1");
                 Long id_2 = resultSet.getLong("id_2");
-                //String date_of_creation = resultSet.getString("date_of_creation");
+
                 LocalDateTime date_of_creation = resultSet.getTimestamp("data_crearii").toLocalDateTime();
                 Friendship friendship = new Friendship(date_of_creation);
                 Tuple<Long,Long> friendship_id = new Tuple<>(id_1,id_2);
@@ -147,20 +142,6 @@ public class FriendshipsDbRepository implements Repository<Tuple<Long,Long>, Fri
         }
     }
 
-
-
-
-    /*public List<Friendship> getAllFriendsForGivenUser(Long id_user){
-        try (Connection connection = DriverManager.getConnection(url, username, password);
-             PreparedStatement statement1 = connection.prepareStatement(FIND_ALL_FRIENDS_FOR_GIVEN_USER_RIGHT_TO_LEFT_DB);
-             PreparedStatement statement2 = connection.prepareStatement(FIND_ALL_FRIENDS_FOR_GIVEN_USER_RIGHT_TO_LEFT_DB))
-        {
-            return getFriendShips(statement);
-        }catch (SQLException ex){
-            ex.printStackTrace();
-        }
-        return null;
-    }*/
 
     public Friendship findOne(Tuple<Long,Long> tuple) {
         String sql="SELECT * from friendships WHERE id_1 = ? and id_2 = ?";

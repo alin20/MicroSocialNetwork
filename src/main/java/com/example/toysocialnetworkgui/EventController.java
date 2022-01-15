@@ -133,6 +133,6 @@ public class EventController implements Observer {
 
     @Override
     public void updateRequests() {
-        //
+        /**/
     }
 }

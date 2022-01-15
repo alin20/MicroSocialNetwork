@@ -287,15 +287,6 @@ public class MainController implements Observer {
             current.setTitle("Messages");
             current.setScene(scene);
             ChatController ctrl = fxmlLoader.getController();
-            /*List<User> found = superService.findUsersByName(usernameTextField.getText());
-            if (found.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error!");
-                alert.setHeaderText("This user doesn't exist!\n");
-                alert.showAndWait();
-                return;
-            }*/
-
             ctrl.afterLoad(superService,currentUser,selected);
 
         }catch (IOException e) {
@@ -322,13 +313,7 @@ public class MainController implements Observer {
 
     }
 
-    public void groupsButtonClick(ActionEvent actionEvent) {
-    }
-
-    public void editProfileButtonClick(ActionEvent actionEvent) {
-    }
-
-    @FXML
+       @FXML
     public void eventsButtonClick(ActionEvent actionEvent) {
         try {
             Node source = (Node) actionEvent.getSource();

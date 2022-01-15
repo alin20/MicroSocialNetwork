@@ -51,8 +51,6 @@ public class Runner {
             System.out.println("User already exists!");
     }
 
-
-
     private void  UIDeleteFriend(User user){
         if(superService.getAllFriendsForGivenUser(user).size() == 0){
             System.out.println("This user has no friends! :(");
@@ -309,9 +307,7 @@ public class Runner {
         System.out.print("Password:");
         String password = console.next();
         String valid_password = password.strip();
-
-
-
+        
 
         if(superService.login(valid_first_name,valid_password) == true)
             System.out.println("login succesful");

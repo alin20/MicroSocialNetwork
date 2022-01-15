@@ -31,7 +31,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //String fileName3= ApplicationContext.getPROPERTIES().getProperty("data.socialnetwork.users");
         String fileName="data/users.csv";
         String fileName2="data/friendships.csv";
         Repository<Long, User> userFileRepository = null;
@@ -64,16 +63,6 @@ public class Main extends Application {
         EventService eventService = new EventService(eventDbRepository);
         SuperService superService = new SuperService(friendshipService,userService,messageService,eventService);
 
-       /* User user = superService.findUserById(6L);
-        superService.replyAll(user,"salut");*/
-
-        //Runner runner = new Runner(superService);
-        //runner.runApp();
-
-        //for console application
-      //  Runner runner = new Runner(superService);
-       // runner.runApp();
-
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
         Parent root = fxmlLoader.load();
@@ -81,7 +70,6 @@ public class Main extends Application {
         mainController.setServiceController(superService);
 
 
-        //Scene scene = new Scene(root, 700, 600);
         Scene scene = new Scene(root, 700, 297, Color.SEAGREEN);
         primaryStage.setTitle("Micro Social Network");
 

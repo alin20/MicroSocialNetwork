@@ -25,15 +25,13 @@ public class InMemoryRepository<ID, E extends Entity<ID>> implements Repository<
         if (id == null)
             throw new IllegalArgumentException("ID must be not null");
         E found  = entities.get(id);
-        /*if(found == null)
-            throw  new EntityNotFoundError("Entity was not found!");*/
+
         return found;
     }
 
     @Override
     public Iterable<E> findAll() {
         return entities.values();
-        //List<E> lsit = new ArrayList<E>(entities.values());
     }
 
     @Override

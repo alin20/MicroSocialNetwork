@@ -155,7 +155,6 @@ public class UserDbRepository implements Repository<Long, User> {
     }
 
 
-    //new add
    @Override
     public List<User> getUserByUsername(String username_1){
        String sql = FIND_USER_BY_USERNAME_DB;

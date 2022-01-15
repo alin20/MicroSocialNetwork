@@ -64,13 +64,11 @@ public class LoginController {
                 Stage current = (Stage) source.getScene().getWindow();
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
                 Parent root = fxmlLoader.load();
-                //Scene scene = new Scene(root, 800, 800);
                 Scene scene = new Scene(root, 950, 623, Color.SEAGREEN);
                 current.setTitle("Micro Social Network" + username);
                 current.setScene(scene);
                 MainController ctrl = fxmlLoader.getController();
                 ctrl.afterLoad(superService,superService.findUsersByUsernameAndPassword(username,password));
-                //ctrl.afterLoad(superService.findUsersByLastName(username).get(0));
 
 
             } catch (IOException e) {
@@ -88,7 +86,6 @@ public class LoginController {
            Parent root = fxmlLoader.load();
            SignupController signupController = fxmlLoader.getController();
            signupController.setSuperService(superService);
-           //Scene scene = new Scene(root, 700, 600);
            Scene scene = new Scene(root, 700, 600, Color.SEAGREEN);
            current.setTitle("MicroSocialNetwork");
            current.setScene(scene);
